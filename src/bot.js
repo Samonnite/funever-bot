@@ -28,25 +28,26 @@ const inlineKeyboard = new InlineKeyboard().add(
 // 监听信息
 bot.on("message:text", async (ctx) => {
   // ctx.reply("已收到: " + ctx.message.text);
-
-  await ctx.api.sendPhoto(
-    ctx.chatId,
-    "https://funever.io/assets/img/man-2.png",
-    {
-      caption: "The Ultimate Web3 Gaming And E-sports Aggregator",
-      parse_mode: "HTML",
-      reply_markup: inlineKeyboard,
-      protect: true,
-    }
-  );
+  if (ctx.message.text === "Dapp") {
+    await ctx.api.sendPhoto(
+      ctx.chatId,
+      "https://funever.io/assets/img/man-2.png",
+      {
+        caption: "The Ultimate Web3 Gaming And E-sports Aggregator",
+        parse_mode: "HTML",
+        reply_markup: inlineKeyboard,
+        protect: true,
+      }
+    );
+  } else {
+    await ctx.reply("Welcome to Funever", {
+      reply_markup: keyboard,
+    });
+  }
 });
 
-const keyboard = new Keyboard().text("Dapp").row().persistent().resized();
-bot.start().then(() => {
-  bot.api.sendMessage({
-    reply_markup: keyboard,
-  });
-});
+const keyboard = new Keyboard().text("Dapp").persistent().resized();
+bot.start();
 
 bot.catch((err) => {
   const ctx = err.ctx;
