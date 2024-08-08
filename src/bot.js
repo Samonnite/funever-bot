@@ -8,11 +8,17 @@ const {
   GrammyError,
   HttpError,
 } = require("grammy");
-const token = process.env.TELEGRAM_BOT_TOKEN;
+
+const TELEGRAM_BOT_TOKEN =
+  process.env.TELEGRAM_BOT_TOKEN ||
+  "7288434975:AAH1Cb2i1bkjNoKmkqv9ulZs4Q9hD43U7yQ";
+const MINI_APP_HOST =
+  process.env.MINI_APP_HOST || "https://dapp-test.funever.io";
+
 const { SocksProxyAgent } = require("socks-proxy-agent");
 
 const socksAgent = new SocksProxyAgent("socks://127.0.0.1:7890");
-const bot = new Bot(token, {
+const bot = new Bot(TELEGRAM_BOT_TOKEN, {
   client: {
     // baseFetchConfig: {
     //   agent: socksAgent,
@@ -21,14 +27,13 @@ const bot = new Bot(token, {
     timeoutSeconds: 60,
   },
 });
-
 const inlineKeyboard = new InlineKeyboard().add(
-  InlineKeyboard.webApp("Open Dapp", `${process.env.MINI_APP_HOST}/dapp/home`)
+  InlineKeyboard.webApp("参与竞猜", `${MINI_APP_HOST}/dapp/home`)
 );
 // 监听信息
 bot.on("message:text", async (ctx) => {
   // ctx.reply("已收到: " + ctx.message.text);
-  if (ctx.message.text === "Dapp") {
+  if (ctx.message.text === "竞猜") {
     await ctx.api.sendPhoto(
       ctx.chatId,
       "https://funever.io/assets/img/man-2.png",
@@ -46,7 +51,7 @@ bot.on("message:text", async (ctx) => {
   }
 });
 
-const keyboard = new Keyboard().text("Dapp").persistent().resized();
+const keyboard = new Keyboard().text("竞猜").persistent().resized();
 bot.start();
 
 bot.catch((err) => {
