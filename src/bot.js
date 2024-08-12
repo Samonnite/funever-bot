@@ -20,10 +20,10 @@ const { SocksProxyAgent } = require("socks-proxy-agent");
 const socksAgent = new SocksProxyAgent("socks://127.0.0.1:7890");
 const bot = new Bot(TELEGRAM_BOT_TOKEN, {
   client: {
-    baseFetchConfig: {
-      agent: socksAgent,
-      compress: true,
-    },
+    // baseFetchConfig: {
+    //   agent: socksAgent,
+    //   compress: true,
+    // },
     timeoutSeconds: 60,
   },
 });
