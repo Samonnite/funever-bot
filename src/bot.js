@@ -20,38 +20,56 @@ const { SocksProxyAgent } = require("socks-proxy-agent");
 const socksAgent = new SocksProxyAgent("socks://127.0.0.1:7890");
 const bot = new Bot(TELEGRAM_BOT_TOKEN, {
   client: {
-    // baseFetchConfig: {
-    //   agent: socksAgent,
-    //   compress: true,
-    // },
+    baseFetchConfig: {
+      agent: socksAgent,
+      compress: true,
+    },
     timeoutSeconds: 60,
   },
 });
-const inlineKeyboard = new InlineKeyboard().add(
+const guessnlineKeyboard = new InlineKeyboard().add(
   InlineKeyboard.webApp("参与竞猜", `${MINI_APP_HOST}/dapp/home`)
+);
+const statInlineKeyboard = new InlineKeyboard().add(
+  InlineKeyboard.webApp("查看统计", `${MINI_APP_HOST}/dapp/home`)
 );
 // 监听信息
 bot.on("message:text", async (ctx) => {
   // ctx.reply("已收到: " + ctx.message.text);
-  if (ctx.message.text === "竞猜") {
-    await ctx.api.sendPhoto(
+  if (ctx.message.text.includes("竞猜")) {
+    return await ctx.api.sendPhoto(
       ctx.chatId,
       "https://funever.io/assets/img/man-2.png",
       {
         caption: "The Ultimate Web3 Gaming And E-sports Aggregator",
         parse_mode: "HTML",
-        reply_markup: inlineKeyboard,
+        reply_markup: guessnlineKeyboard,
         protect: true,
       }
     );
-  } else {
-    await ctx.reply("Welcome to Funever", {
-      reply_markup: keyboard,
-    });
   }
+  if (ctx.message.text.includes("统计")) {
+    return await ctx.api.sendPhoto(
+      ctx.chatId,
+      "https://funever.io/assets/img/man-2.png",
+      {
+        caption: "The Ultimate Web3 Gaming And E-sports Aggregator",
+        parse_mode: "HTML",
+        reply_markup: statInlineKeyboard,
+        protect: true,
+      }
+    );
+  }
+  return await ctx.reply("Welcome to Funever", {
+    reply_markup: keyboard,
+  });
 });
 
-const keyboard = new Keyboard().text("竞猜").persistent().resized();
+const keyboard = new Keyboard()
+  .text("🎖 竞猜")
+  .text("🗂 统计")
+  .persistent()
+  .resized();
 bot.start();
 
 bot.catch((err) => {
