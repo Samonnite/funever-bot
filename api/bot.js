@@ -7,6 +7,7 @@ const {
   InlineKeyboard,
   GrammyError,
   HttpError,
+  webhookCallback,
 } = require("grammy");
 
 const TELEGRAM_BOT_TOKEN =
@@ -18,7 +19,7 @@ const MINI_APP_HOST =
 const { SocksProxyAgent } = require("socks-proxy-agent");
 
 const socksAgent = new SocksProxyAgent("socks://127.0.0.1:7890");
-const bot = new Bot(TELEGRAM_BOT_TOKEN, {
+export const bot = new Bot(TELEGRAM_BOT_TOKEN, {
   client: {
     // baseFetchConfig: {
     //   agent: socksAgent,
@@ -84,3 +85,5 @@ bot.catch((err) => {
     console.error("Unknown error:", e);
   }
 });
+
+export default webhookCallback(bot, "http");
