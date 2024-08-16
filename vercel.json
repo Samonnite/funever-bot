@@ -1,5 +1,5 @@
 {
   "outputDirectory": ".",
   "installCommand": "npm i --omit=dev",
-  "buildCommand": "npx node scripts/build.js"
+  "buildCommand": "node scripts/build.js"
 }
