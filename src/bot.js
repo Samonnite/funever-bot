@@ -1,14 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import {
-  Bot,
-  Keyboard,
-  InlineKeyboard,
-  GrammyError,
-  HttpError,
-  webhookCallback,
-} from "grammy";
+import { Bot, Keyboard, InlineKeyboard, GrammyError, HttpError } from "grammy";
 
 const TELEGRAM_BOT_TOKEN =
   process.env.TELEGRAM_BOT_TOKEN ||
@@ -85,5 +78,3 @@ bot.catch((err) => {
     console.error("Unknown error:", e);
   }
 });
-
-export default webhookCallback(bot, "http");
