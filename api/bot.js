@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const {
+import {
   Bot,
   Keyboard,
   InlineKeyboard,
   GrammyError,
   HttpError,
   webhookCallback,
-} = require("grammy");
+} from "grammy";
 
 const TELEGRAM_BOT_TOKEN =
   process.env.TELEGRAM_BOT_TOKEN ||
@@ -16,7 +16,7 @@ const TELEGRAM_BOT_TOKEN =
 const MINI_APP_HOST =
   process.env.MINI_APP_HOST || "https://dapp-test.funever.io";
 
-const { SocksProxyAgent } = require("socks-proxy-agent");
+import { SocksProxyAgent } from "socks-proxy-agent";
 
 const socksAgent = new SocksProxyAgent("socks://127.0.0.1:7890");
 export const bot = new Bot(TELEGRAM_BOT_TOKEN, {

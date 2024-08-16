@@ -1,4 +1,4 @@
-const { bot } = require("../api/bot");
+import { bot } from "../api/bot";
 
 const {
   VERCEL_URL: host,
