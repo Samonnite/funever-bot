@@ -1,4 +1,4 @@
-const { bot } = reuqire("../api/bot");
+const { bot } = require("../api/bot");
 
 const {
   VERCEL_URL: host,
