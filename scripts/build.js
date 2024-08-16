@@ -1,4 +1,4 @@
-import { bot } from "../api/bot";
+const { bot } = reuqire("../api/bot");
 
 const {
   VERCEL_URL: host,
