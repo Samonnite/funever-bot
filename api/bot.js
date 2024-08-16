@@ -9,6 +9,10 @@ const {
   HttpError,
   webhookCallback,
 } = require("grammy");
+const express = require("express");
+
+const app = express(); // 或者其它你正在使用的
+app.use(express.json()); // 解析 JSON 请求
 
 const TELEGRAM_BOT_TOKEN =
   process.env.TELEGRAM_BOT_TOKEN ||
@@ -71,7 +75,7 @@ const keyboard = new Keyboard()
   .text("🗂 统计")
   .persistent()
   .resized();
-bot.start();
+// bot.start();
 
 bot.catch((err) => {
   const ctx = err.ctx;
@@ -85,5 +89,7 @@ bot.catch((err) => {
     console.error("Unknown error:", e);
   }
 });
+
+app.use(webhookCallback(bot, "express"));
 
 export default webhookCallback(bot, "std/http");
