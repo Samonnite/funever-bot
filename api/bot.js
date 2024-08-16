@@ -71,7 +71,7 @@ const keyboard = new Keyboard()
   .text("🗂 统计")
   .persistent()
   .resized();
-bot.start();
+// bot.start();
 
 bot.catch((err) => {
   const ctx = err.ctx;
