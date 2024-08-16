@@ -7,6 +7,7 @@ const {
   InlineKeyboard,
   GrammyError,
   HttpError,
+  webhookCallback,
 } = require("grammy");
 
 const TELEGRAM_BOT_TOKEN =
@@ -84,3 +85,5 @@ bot.catch((err) => {
     console.error("Unknown error:", e);
   }
 });
+
+export default webhookCallback(bot, "std/http");
