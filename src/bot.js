@@ -7,7 +7,7 @@ const TELEGRAM_BOT_TOKEN =
   process.env.TELEGRAM_BOT_TOKEN ||
   "7288434975:AAH1Cb2i1bkjNoKmkqv9ulZs4Q9hD43U7yQ";
 const MINI_APP_HOST =
-  process.env.MINI_APP_HOST || "https://dapp-test.funever.io";
+  process.env.MINI_APP_HOST || "https://test-ton.funever.io";
 
 import { SocksProxyAgent } from "socks-proxy-agent";
 
@@ -22,10 +22,10 @@ export const bot = new Bot(TELEGRAM_BOT_TOKEN, {
   },
 });
 const guessnlineKeyboard = new InlineKeyboard().add(
-  InlineKeyboard.webApp("参与竞猜", `${MINI_APP_HOST}/dapp/home`)
+  InlineKeyboard.webApp("参与竞猜", `${MINI_APP_HOST}/home`)
 );
 const statInlineKeyboard = new InlineKeyboard().add(
-  InlineKeyboard.webApp("查看统计", `${MINI_APP_HOST}/dapp/home`)
+  InlineKeyboard.webApp("查看统计", `${MINI_APP_HOST}/home`)
 );
 // 监听信息
 bot.on("message:text", async (ctx) => {
